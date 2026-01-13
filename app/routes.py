@@ -13,9 +13,14 @@ def health_check():
 def list_todos():
     return store.list_todos()
 
+# @router.post("/todos", response_model=Todo, status_code=status.HTTP_201_CREATED)
+# def create_todo(payload: TodoCreate):
+#     return store.create_todo(payload)
+
 @router.post("/todos", response_model=Todo, status_code=status.HTTP_201_CREATED)
 def create_todo(payload: TodoCreate):
     return store.create_todo(payload)
+
 
 @router.get("/todos/{todo_id}", response_model=Todo)
 def get_todo(todo_id: int):

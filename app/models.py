@@ -11,12 +11,21 @@ class InMemoryTodoStore:
 
     def get_todo(self, todo_id: int) -> Optional[Todo]:
         return next((t for t in self._todos if t.id == todo_id), None)
+    
+
+    # def create_todo(self, payload: TodoCreate) -> Todo:
+    #     todo = Todo(id=self._next_id, **payload.model_dump())
+    #     self._next_id += 1
+    #     self._todos.append(todo)
+    #     return todo
+
 
     def create_todo(self, payload: TodoCreate) -> Todo:
-        todo = Todo(id=self._next_id, **payload.model_dict())
+        todo = Todo(id=self._next_id, **payload.model_dump())
         self._next_id += 1
         self._todos.append(todo)
         return todo
+
 
     def update_todo(self, todo_id: int, payload: TodoCreate) -> Optional[Todo]:
         todo = self.get_todo(todo_id)
